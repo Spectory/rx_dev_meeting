@@ -26,7 +26,7 @@
     );
 
     console.log("****** Ex 3 ******")
-    // observable.map() return an observable too
+    // operators like map() return an observable too
     Rx.Observable.from(['mama', 'papa', 'yoyo'])
     .map(x => x.toLocaleUpperCase())
     .subscribe(
