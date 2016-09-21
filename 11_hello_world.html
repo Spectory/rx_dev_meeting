@@ -1,0 +1,32 @@
+<html>
+<head>
+</head>
+
+<body>
+  <script src="rx.all.compat.js"></script>
+  <script>
+
+    console.log("****** Ex 1 ******")
+
+    Rx.Observable.of(`Hello World`)
+    .subscribe(result => console.log(result));
+
+    console.log("****** Ex 2 ******")
+
+    const set = new Set([1, 2, 3])
+    Rx.Observable.from(set)
+    .map(x => x * 2)
+    .subscribe(x => console.log(x),
+               error => console.error(error),
+               () => console.log('done'));
+
+    console.log("****** Ex 3 ******")
+    Rx.Observable.from(['mama', 'papa', 'yoyo'])
+    .map(x => x.toLocaleUpperCase())
+    .subscribe(x => console.log(x),
+               error => console.error(error),
+               () => console.log('done'));
+  </script>
+</body>
+
+</html>

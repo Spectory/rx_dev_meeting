@@ -1,0 +1,22 @@
+<html>
+<head>
+</head>
+
+<body>
+  <script src="rx.all.compat.js"></script>
+  <script>
+
+   const mouseMoves = Rx.Observable.fromEvent(document, `mousemove`)
+
+    const movesOnRight = mouseMoves.filter(event => event.clientX > window.innerWidth / 2).take(10);
+    const movesOnLeft = mouseMoves.filter(event => event.clientX < window.innerWidth / 2).take(10);
+
+    movesOnRight.subscribe(event => console.log(`EAST side is the BEST!`, event.clientX, event.clientY));
+    movesOnLeft.subscribe(event => console.log(`WEST side is the BEST!`, event.clientX, event.clientY));
+
+  </script>
+  <h1 style='float: left;'>West</h1>
+  <h1 style='float: right;'>East</h1>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<html>
+<head>
+</head>
+
+<body>
+  <script src="rx.all.compat.js"></script>
+  <script>
+
+    console.log("****** Ex 1 ******")
+      let ticker = false;
+      const observable = Rx.Observable.interval(1000)
+        .map(i => {
+          ticker = !ticker;
+          if (ticker) {
+            return 'Tick';
+          } else {
+            return 'Tock';
+          }
+        });
+
+    observable.subscribe(x => console.log(x))
+
+  </script>
+</body>
+
+</html>
