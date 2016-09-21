@@ -1,22 +1,53 @@
 <html>
 <head>
+  <!-- ~~~~~~~~~~~~~~~~~~~~ STYLE ~~~~~~~~~~~~~~~~~~~~ -->
+  <style>
+    .east {
+      float: right;
+      width: 50%;
+      height: 100%;
+      background: red;
+    }
+    .west {
+      float: left;
+      width: 50%;
+      height: 100%;
+      background: yellow;
+    }
+  </style>
+
 </head>
 
 <body>
+  <!-- ~~~~~~~~~~~~~~~~~~~~ CONTENT ~~~~~~~~~~~~~~~~~~~~ -->
+  <div class='west'>
+    <h1>West</h1>
+  </div>
+  <div class='east'>
+    <h1 >East</h1>
+  </div>
+
+  <!-- ~~~~~~~~~~~~~~~~~~~~ Script ~~~~~~~~~~~~~~~~~~~~ -->
   <script src="rx.all.compat.js"></script>
   <script>
 
-   const mouseMoves = Rx.Observable.fromEvent(document, `mousemove`)
+    const mouseMoves = Rx.Observable.fromEvent(document, `mousemove`)
 
     const movesOnRight = mouseMoves.filter(event => event.clientX > window.innerWidth / 2).take(10);
     const movesOnLeft = mouseMoves.filter(event => event.clientX < window.innerWidth / 2).take(10);
 
-    movesOnRight.subscribe(event => console.log(`EAST side is the BEST!`, event.clientX, event.clientY));
-    movesOnLeft.subscribe(event => console.log(`WEST side is the BEST!`, event.clientX, event.clientY));
-
+    movesOnRight.subscribe(
+      event => console.log(`EAST side is the BEST!`, event.clientX, event.clientY),
+      err => console.err(err),
+      () => console.log('****** EAST done! *******')
+    );
+    movesOnLeft.subscribe(
+      event => console.log(`WEST side is the BEST!`, event.clientX, event.clientY),
+      err => console.err(err),
+      () => console.log('******* WEST done! *******')
+    );
   </script>
-  <h1 style='float: left;'>West</h1>
-  <h1 style='float: right;'>East</h1>
+
 </body>
 
 </html>

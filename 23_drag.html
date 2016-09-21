@@ -1,31 +1,27 @@
 <html>
 <head>
+<style>
+  #dragTarget {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 200px;
+    width: 200px;
+    background-color: #000000;
+    border: 1px solid #666666;
+    color: #ffffff;
+    padding: 10px;
+    position: absolute;
+    cursor: move;
+  }
+</style>
 </head>
 
 <body>
-  <div id="dragTarget" style='backgourd-color: #aaa;'>Drag Me!</div>
-  <div class="container">
-    <div class="page-header">
-      <h1>RxJS  Drag and Drop Example</h1>
-      <p class="lead">Example to show coordinating events to perform drag and drop</p>
-    </div>
+  <div id="dragTarget" style='backgourd-color: #aaa;'>
+    Drag Me!
   </div>
 
-  <style>
-    #dragTarget {
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: contain;
-      height: 200px;
-      width: 200px;
-      background-color: #000000;
-      border: 1px solid #666666;
-      color: #ffffff;
-      padding: 10px;
-      position: absolute;
-      cursor: move;
-    }
-  </style>
   <script src="rx.all.compat.js"></script>
   <script>
     var dragTarget = document.getElementById('dragTarget');

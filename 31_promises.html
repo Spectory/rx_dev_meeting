@@ -1,0 +1,40 @@
+<html>
+<head>
+</head>
+
+<body>
+  <script src="angular.min.js"></script>
+  <script src="rx.all.compat.js"></script>
+  <script>
+    var app = angular.module('app', []);
+    app.controller('ctl', function($scope, $http) {
+      function promiseUser() { return $http.get('https://randomuser.me/api') }
+
+      $scope.user = {};
+      $scope.init = function () {
+        //map iinterval steam into promises stream
+        var user_stream = Rx.Observable.interval(3000)
+        .flatMap(function(i) {
+          console.log(i)
+          return Rx.Observable.fromPromise(promiseUser());
+        });
+
+        user_stream.subscribe(function(res) {
+          console.log(res.data.results[0]);
+          $scope.user = res.data.results[0];
+          $scope.$apply();
+        });
+      }
+    });
+  </script>
+
+  <div ng-app='app'>
+    <div ng-controller='ctl' ng-init='init()'>
+      <h1>Random User</h1>
+      <h3>{{user.name.title}}. {{user.name.first}} {{user.name.last}}</h3>
+      <img ng-src={{user.picture.large}}></img>
+    </div>
+  </div>
+</body>
+
+</html>
