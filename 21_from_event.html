@@ -19,8 +19,8 @@
 <body>
   <script src="rx.all.compat.js"></script>
   <script>
-   const mouseMoves = Rx.Observable.fromEvent(document, `mousemove`)
-
+    // create stream from event
+    const mouseMoves = Rx.Observable.fromEvent(document, `mousemove`)
     const movesOnRight = mouseMoves.filter(event => event.clientX > window.innerWidth / 2);
     const movesOnLeft = mouseMoves.filter(event => event.clientX < window.innerWidth / 2);
 

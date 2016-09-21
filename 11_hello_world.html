@@ -7,25 +7,33 @@
   <script>
 
     console.log("****** Ex 1 ******")
-
-    Rx.Observable.of(`Hello World`)
-    .subscribe(result => console.log(result));
+    // stream from static value
+    var observable = Rx.Observable.of(`Hello World`);
+    var observer = observable.subscribe(result => console.log(result));
+    console.log('observable: ', observable);
+    console.log('observer: ', observer);
 
     console.log("****** Ex 2 ******")
-
+    // stream from Set
     const set = new Set([1, 2, 3])
-    Rx.Observable.from(set)
-    .map(x => x * 2)
-    .subscribe(x => console.log(x),
-               error => console.error(error),
-               () => console.log('done'));
+    // we can chain observables
+    observable = Rx.Observable.from(set).map(x => x * 2)
+    // observer can recieve 3 callback methods.
+    observer = observable.subscribe(
+      x => console.log(x), //on next
+      error => console.error(error), // on error
+      () => console.log('done') // on done
+    );
 
     console.log("****** Ex 3 ******")
+    // observable.map() return an observable too
     Rx.Observable.from(['mama', 'papa', 'yoyo'])
     .map(x => x.toLocaleUpperCase())
-    .subscribe(x => console.log(x),
-               error => console.error(error),
-               () => console.log('done'));
+    .subscribe(
+      x => console.log(x),
+      error => console.error(error),
+      () => console.log('done')
+    );
   </script>
 </body>
 

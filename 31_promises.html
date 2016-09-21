@@ -12,7 +12,7 @@
 
       $scope.user = {};
       $scope.init = function () {
-        //map iinterval steam into promises stream
+        //map interval stream into promises stream
         var user_stream = Rx.Observable.interval(3000)
         .flatMap(function(i) {
           console.log(i)

@@ -32,7 +32,6 @@
   <script>
 
     const mouseMoves = Rx.Observable.fromEvent(document, `mousemove`)
-
     const movesOnRight = mouseMoves.filter(event => event.clientX > window.innerWidth / 2).take(10);
     const movesOnLeft = mouseMoves.filter(event => event.clientX < window.innerWidth / 2).take(10);
 
@@ -46,6 +45,12 @@
       err => console.err(err),
       () => console.log('******* WEST done! *******')
     );
+
+    /*
+      how would this kind of functionallty look like when we use regular event listening?
+      1. we would need a flag, that will count how many events were fired for each direction, and mutate it inside the event listener. that's a side effect!
+      2. we need to cancel the event listenr manuly when it is no longer needed.
+    */
   </script>
 
 </body>

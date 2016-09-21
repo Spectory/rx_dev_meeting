@@ -18,7 +18,11 @@
           }
         });
 
-    observable.subscribe(x => console.log(x))
+    observable.subscribe(
+      x => console.log(x),
+      err => console.error(err),
+      () => console.log('done') //never fired
+    );
 
   </script>
 </body>
