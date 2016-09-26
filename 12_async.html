@@ -8,6 +8,7 @@
 
     console.log("****** Ex 1 ******")
       let ticker = false;
+      // observable from basic event
       const observable = Rx.Observable.interval(1000)
         .map(i => {
           ticker = !ticker;

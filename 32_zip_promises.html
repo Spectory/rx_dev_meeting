@@ -1,0 +1,50 @@
+<html>
+<head>
+</head>
+
+<body>
+  <script src="angular.min.js"></script>
+  <script src="rx.all.compat.js"></script>
+  <script>
+    var app = angular.module('app', []);
+    app.controller('ctl', function($scope, $http) {
+      function promiseUser() { return $http.get('https://randomuser.me/api') }
+      function promiseJoke() { return $http.get('http://api.icndb.com/jokes/random') }
+
+      $scope.user = {};
+      $scope.init = function () {
+        //map interval stream into promises stream
+        var user_stream = Rx.Observable.interval(10000)
+        .flatMap(function(i) {
+          return Rx.Observable.fromPromise(promiseUser());
+        });
+
+        var cat_stream = Rx.Observable.interval(10000)
+        .flatMap(function(i) {
+          return Rx.Observable.fromPromise(promiseJoke());
+        });
+
+        users_cats_stream = Rx.Observable.combineLatest(
+          user_stream,
+          cat_stream
+        );
+
+        users_cats_stream.subscribe(function(values) {
+          $scope.user = values[0].data.results[0];
+          $scope.joke = values[1].data.value.joke;
+          $scope.$apply();
+        });
+      }
+    });
+  </script>
+
+  <div ng-app='app'>
+    <div ng-controller='ctl' ng-init='init()'>
+      <h3>{{user.name.title}}. {{user.name.first}} {{user.name.last}}</h3>
+      <img ng-src={{user.picture.large}}></img>
+      <h1>{{joke}}</h1>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -32,6 +32,7 @@
   <script>
 
     const mouseMoves = Rx.Observable.fromEvent(document, `mousemove`)
+    // limit each stream to 10 events.
     const movesOnRight = mouseMoves.filter(event => event.clientX > window.innerWidth / 2).take(10);
     const movesOnLeft = mouseMoves.filter(event => event.clientX < window.innerWidth / 2).take(10);
 

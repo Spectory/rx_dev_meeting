@@ -16,8 +16,7 @@
     console.log("****** Ex 2 ******")
     // stream from Set
     const set = new Set([1, 2, 3])
-    // we can chain observables
-    observable = Rx.Observable.from(set).map(x => x * 2)
+    observable = Rx.Observable.from(set)
     // observer can recieve 3 callback methods.
     observer = observable.subscribe(
       x => console.log(x), //on next
